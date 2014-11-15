@@ -1,4 +1,0 @@
-HackerRank
-==========
-
-Hackerrank submissions
