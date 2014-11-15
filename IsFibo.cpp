@@ -6,29 +6,46 @@
 #include <algorithm>
 using namespace std;
 
-int GenerateFiboTable(map<long long int, long long int> &FiboTable, long long int num) {
-    if(FiboTable.count(num))
-      return 1;
-    for(int i = 0;; i++) {
-        if (i == 0 || i == 1) FiboTable.insert(map<int, int>::value_type(i, 1));
-        if(i >= 2) {
-            FiboTable.insert(map<int, int>::value_type(i,  FiboTable.find(i-1)->second + FiboTable.find(i-2)->second));
-        }
-        if(FiboTable.find(i)->second == num)
-            return 1;
-        if(FiboTable.find(i)->second > num)
-            return 0;
+#define MAXFIB 50
+
+// http://www.maths.surrey.ac.uk/hosted-sites/R.Knott/Fibonacci/fibtable.html
+long long int FiboTable[50]; // 50th one exceeds the limit provided in problem
+
+void GenerateFiboTable() { // This table is ordered
+    for(int i = 0; i < MAXFIB; i++) {
+        if(i == 0 || i == 1) FiboTable[i] = 1;
+        if(i >= 2)
+            FiboTable[i] = FiboTable[i-1] + FiboTable[i-2];
     }
+}
+
+int IsFibo (long long int num) { // Binary Search
+    int left = 0, right = MAXFIB-1; // 50 - 1
+    int middle = (left+right)/2;
+    while(left <= right) {
+        if(FiboTable[middle] > num) {
+            right = middle-1;
+        }
+        else
+        if(FiboTable[middle] < num) {
+            left = middle+1;
+            
+        }
+        else // Must be equal
+            return 1;
+        middle = (left+right)/2;
+    }
+    return 0;
 }
 
 int main() {
     int n;
     cin >> n;
-    map<long long int, long long int> FiboTable;
+    GenerateFiboTable();
     for(int i = 0; i < n; i++) {
         long long int num;
         cin >> num;
-        int res = GenerateFiboTable(FiboTable, num); // generate up to num
+        int res = IsFibo(num);
         if(res)
             cout << "IsFibo";
         else
