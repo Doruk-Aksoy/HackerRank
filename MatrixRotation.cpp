@@ -15,8 +15,8 @@ int main() {
     int M, N, R;
     cin >> M >> N >> R;
     
-    for (int i = 0; i < M; i ++)
-        for (int j = 0; j < N; j++)
+    for (int i = 0; i < M; ++i)
+        for (int j = 0; j < N; ++j)
             cin >> matrix[i][j];
     
     int rectangles = MIN(M, N) >> 1; // rectangle count is even of M or N / 2
@@ -51,8 +51,8 @@ int main() {
             for (j = 0; j < m - 1; ++j) // -1 is again, exclusion of corner element
                 matrix[i + m - 1 - j][i] = temp[((n << 1) + m + j + R - 3) % cycles];
     }
-    for (int i = 0; i < M; i ++) {
-        for (int j = 0; j < N; j++)
+    for (int i = 0; i < M; ++i) {
+        for (int j = 0; j < N; ++j)
             cout << matrix[i][j] << ' ';
         cout << "\n";
     }
