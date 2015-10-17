@@ -56,27 +56,24 @@ int main() {
 }
 // Shorter version -- Improved on previous
 /*
-#include <iostream>
-#include <string>
-
-using namespace std;
-
-int counter[26];
-
 int main() {
-  string str; cin >> str;
-  for(int i = 0; i < str.length(); i++)
-    counter[str[i] - 'a']++;
-
-  bool hasOdd = false;
-  string res = "YES";
-  for(int i = 0; i < 26; i++) {
-    if(counter[i] % 2 != 0) {
-      if(hasOdd) { res = "NO"; break; }
-      else hasOdd = true; 
+    int counter[26] = {0};
+    string str; cin >> str;
+    for(int i = 0; i < str.length(); ++i)
+        ++counter[str[i] - 'a'];
+    bool hasOdd = false;
+    string res = "YES";
+    for(int i = 0; i < 26; ++i) {
+        if(counter[i] % 2) {
+            if(hasOdd) {
+                res = "NO"; 
+                break; 
+            }
+            else 
+                hasOdd = true; // allow one odd only
+        }
     }
-  }
-  cout << res << endl;
-  return 0;
+    cout << res << endl;
+    return 0;
 }
 */
